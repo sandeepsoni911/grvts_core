@@ -1,0 +1,61 @@
+--- Request URL ---
+http://webc002.generic.dev.us-east-1b.hubzu.com:8080/api/lead
+
+--- headers ---
+
+Content-Type - application/json
+
+--- Body ---
+
+{
+	"firstName":"firstName",
+	"lastName":"lastName",
+	"email":"test@testDomain.com",
+	"phone":"123123124",
+	"company":"company",
+	"source":"source",
+	"comments":"comments",
+	"preApprovedForMortgage":"Unknown",
+	"workingWithRealtor":"I am represented",
+	"buyerReadinessTimeline":"Now",
+	"listingId":"listingId",
+	"marketingOptIn":"true",
+	"preferredContactTime":"test",
+	"preferredContactMethod":"Email",
+	"priceRange":"15000-200000",
+	"buyerLeadQuality":"Hot",
+	"preferredLanguage":"English",
+	"state":"AC",
+	"propertyAddress":"1234 Test street test , WA 12345",
+	"mlsId":"mlsId",
+	"alId":"ALID",
+	"interestedZipcodes":"interestedZipcodes",
+	"leadType":"BUYER",
+	"ownersComIdentifier":"ownersComIdentifier",
+	"offerAmount":"54545",
+	"listingCreationDate":"2016-06-24",
+	"financing":"Cash",
+	"website":"http://test.com",
+	"leadSourceUrl":"http://test.com",
+	"requestType":"MAKE_OFFER",
+	"savedSearchValues":"savedSearchValues",
+	"earnestMoneyDeposit":"10000.96",
+	"purchaseMethod":"Cash",
+	"downPayment":"10000.25",
+	"propertyTourInformation":"propertyTourInformation",
+	"additionalPropertyData":"additionalPropertyData",
+	"websiteSessionData":"websiteSessionData",
+	"ownersVisitorId":"ownersVisitorId",
+	"message":"message",
+	"medianPrice":"10000.25",
+	"lastVisitDateTime":"2016-06-24 12:30 AM",
+	"mlsPackageType":"MIN_SERVICE_STATE_6_MONTHS",
+	"googleAnalyticsCampaign":"googleAnalyticsCampaign",
+    "googleAnalyticsContent":"googleAnalyticsContent",
+    "googleAnalyticsMedium":"googleAnalyticsMedium",
+    "googleAnalyticsSource":"googleAnalyticsSource",
+    "googleAnalyticsTerm":"googleAnalyticsTerm",
+    "unbouncePageVariant":"unbo",
+    "gclId":"gclId",
+	"ownsHome" : true
+}

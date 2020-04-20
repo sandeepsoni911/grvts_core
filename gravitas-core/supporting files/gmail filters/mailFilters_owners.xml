@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+	<title>Mail Filters</title>
+	<id>tag:mail.google.com,2008:filters:1469180421724,1476440781152,1476440805034</id>
+	<updated>2016-10-28T11:29:48Z</updated>
+	<author>
+		<name>Ownerstest Affiliatedleads</name>
+		<email>ownerstestaffiliatedleads@gmail.com</email>
+	</author>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469180421724</id>
+		<updated>2016-10-28T11:29:48Z</updated>
+		<content></content>
+		<apps:property name='subject' value='(Lead Data Validation Error) OR (Lead Parsing Error)'/>
+		<apps:property name='label' value='Lead_Errors'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1476440781152</id>
+		<updated>2016-10-28T11:29:48Z</updated>
+		<content></content>
+		<apps:property name='subject' value='New Lead from'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1476440805034</id>
+		<updated>2016-10-28T11:29:48Z</updated>
+		<content></content>
+		<apps:property name='subject' value='You have received a lead from Realtor.com'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+</feed>

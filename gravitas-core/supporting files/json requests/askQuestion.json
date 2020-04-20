@@ -1,0 +1,33 @@
+--- Request URL ---
+http://webc002.generic.dev.us-east-1b.hubzu.com:8080/api/asaquestion
+
+--- headers ---
+
+Content-Type - application/json
+
+--- Body ---
+{
+"firstName":"firstName",
+"lastName":"lastName",
+"email":"email.1240.001@email.com",
+"phone":"123123123",
+"comments":"comments",
+"source":"source",
+"leadSourceUrl":"http://test.com",
+"state":"AD",
+"propertyAddress":"propertyAddress",
+"additionalPropertyData":"additionalPropertyData",
+"ownersVisitorId":"ownersVisitorId",
+"websiteSessionData":"websiteSessionData",
+"lastVisitDateTime":"2016-06-24 12:30 AM",
+"medianPrice":"123",
+"googleAnalyticsCampaign":"googleAnalyticsCampaign",
+"googleAnalyticsContent":"googleAnalyticsContent",
+"googleAnalyticsMedium":"googleAnalyticsMedium",
+"googleAnalyticsSource":"googleAnalyticsSource",
+"googleAnalyticsTerm":"googleAnalyticsTerm",
+"ownsHome":"true",
+"listingId":"listingId",
+"mlsId":"mlsId",
+"alId":"alId"
+}

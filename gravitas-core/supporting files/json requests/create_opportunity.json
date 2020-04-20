@@ -1,0 +1,44 @@
+---RequestURL---
+http://webc002.generic.dev.us-east-1b.hubzu.com:8080/api/opportunity
+
+---headers---
+Content-Type-application/json---
+
+Body---
+{
+	"seller": {
+		"id": "SELLER555",
+		"firstName": "sellerid",
+		"lastName": "555",
+		"phoneNumber": "35555",
+		"mainContactNumer": "66666",
+		"email": "seller555@gmail.com",
+		"address": {
+			"address1": "335",
+			"address2": "west stree",
+			"city": "Gorgia",
+			"state": "MI",
+			"county": "Atlanta",
+			"zip": "30066"
+		}
+	},
+	"propertyOrder": {
+		"orderType": "NON-REO",
+		"property": {
+			"listingId": "LISTING66",
+			"price": 2222,
+			"numberBeds": 2,
+			"numberFullBaths": 2,
+			"numberHalfBaths": 1,
+			"squareFeet": 1022,
+			"address": {
+				"address1": "555",
+				"address2": "west stree",
+				"city": "WC",
+				"state": "PA",
+				"county": "WC",
+				"zip": "54455"
+			}
+		}
+	}
+}

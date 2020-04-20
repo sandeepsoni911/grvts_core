@@ -1,0 +1,60 @@
+{
+  "dashboard" : {
+    "performanceThreshold" : [ {
+      "name" : "5%",
+      "value" : 5
+    }, {
+      "name" : "10%",
+      "value" : 10
+    }, {
+      "name" : "15%",
+      "value" : 15
+    }, {
+      "name" : "20%",
+      "value" : 20
+    }, {
+      "name" : "25%",
+      "value" : 25
+    } ]
+  },
+  "onBoarding" : {
+    "agentStatus" : [ {
+      "name" : "Onboarding",
+      "value" : "onboarding"
+    }, {
+      "name" : "Active",
+      "value" : "active"
+    }, {
+      "name" : "Inactive",
+      "value" : "inactive"
+    }, {
+      "name" : "Onhold",
+      "value" : "hold"
+    } ],
+    "drivingRadius" : [ 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 ],
+    "languages" : [ {
+      "name" : "English",
+      "value" : "english"
+    }, {
+      "name" : "English & Spanish",
+      "value" : "english_spanish"
+    } ],
+    "mobileCarrier" : [ "Alltell", "AT&T", "Boost Mobile", "Cricket", "Metro PCS", "Sprint", "T-Mobile", "US Cellular", "Verizon", "Virgin Mobile", "Google/Bandwidth.com (Syniverse)" ],
+    "state" : [ "GA", "AZ", "AL", "AK", "AR", "CA", "CO", "CT", "DE", "FL", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY", "GU", "PR", "VI" ]
+  },
+  "presetNotes" : [ "Left a Voicemail", "Looking for a single story home", "Multistory home", "Need washer/dryer in unit", "2 car garage", "1 car garage", "Buyer is working on credit repair", "Buyer is no longer looking", "Not qualified", "Fenced yard", "Master on ground floor", "Porch", "Central HVAC", "Single Family", "Condo/Townhouse", "Rent-to-own", "Private Parking - only have street parking", "Basement", "Pool", "Lot size", "School district", "Investor" ],
+  "stageReasons" : {
+    "buyer" : {
+      "Closed Lost" : [ "Buyer cannot be qualified", "Buyer is already working with an agent", "Buyer is an agent", "Buyer is not interested in purchasing", "Buyer is unresponsive", "Other" ]
+    },
+    "seller" : {
+      "Closed Lost" : [ "Already Listed", "Already Working with Agent", "Cannot Verify Ownership", "Do Not Call", "Invalid Phone", "Not Interested", "Not Ready to List", "Other", "Price Range Below Minimum", "Property Sold", "Referred to Network Brokers", "Seller is a Real Estate Agent", "Under Contract", "Unresponsive", "Withdrawn - Seller", "Withdrawn - Owners", "MLS Expired", "Refunded", "Upgrade", "Downgrade" ]
+    }
+  },
+  "stages" : {
+    "buyer" : [ "New", "Claimed", "In Contact", "Face To Face Meeting", "Showing Homes", "Securing Financing", "Writing Offer", "Pending Sale", "Sold", "Leased", "Closed Lost" ],
+    "seller" : [ "New", "Claimed", "In Contact", "Listing Appointment", "Listing Agreement Signed", "Active - Unlisted", "Active - MLS", "Active - Rental", "Pending Sale", "Sold", "Leased", "Temporary Off Market", "Expired", "Cancelled", "Closed Lost", "Upgrade", "Downgrade" ]
+  },
+  "timeframe" : [ "Now", "1-3 Months", "3-6 Months", "6+ Months" ],
+  "titleReasons" : [ "PTS on Offer", "I have a preferred title/closing company", "My client has a preferred title/closing company", "Other party chose title/closing company" ]
+}

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/integration
+            http://www.springframework.org/schema/integration/spring-integration.xsd
+            http://www.springframework.org/schema/integration/amqp
+            http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+            http://www.springframework.org/schema/rabbit
+            http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+            http://www.springframework.org/schema/integration/stream
+            http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd">
+
+	<!-- rabbit connection factory, rabbit template, and rabbit admin -->
+	<import resource="classpath:META-INF/amqp/gravitas-amqp-config.xml" />
+
+		<!-- rabbit connection factory, rabbit template, and rabbit admin -->
+	 <import resource="classpath:META-INF/amqp/gravitas-analytics-amqp-config.xml" />
+
+<!-- OUTBOUND configuration START -->
+	<!-- Gateway configuration start -->
+	<int:gateway id="leadMessageGatewayChannel"
+		service-interface="com.owners.gravitas.gateway.LeadMessageGateway"
+		error-channel="errorChannel" />
+	<int:gateway id="opportunityChangeMessageGatewayChannel"
+		service-interface="com.owners.gravitas.gateway.OpportunityChangeMessageGateway"
+		error-channel="errorChannel" />
+	<int:gateway id="contactChangeMessageGatewayChannel"
+		service-interface="com.owners.gravitas.gateway.ContactChangeMessageGateway"
+		error-channel="errorChannel" />
+	<int:gateway id="agentCreateMessageGatewayChannel"
+		service-interface="com.owners.gravitas.gateway.AgentCreateMessageGateway"
+		error-channel="errorChannel" />
+	<!-- Gateway configuration end -->
+
+	<!-- Chanel config start -->
+	<int:channel id="leadChange.update" />
+	<int:channel id="leadChange.update.jsonEnriched" />
+	<int:channel id="lead.create" />
+	<int:channel id="lead.create.jsonEnriched" />
+	<int:channel id="opportunityChange.update" />
+	<int:channel id="opportunityChange.update.jsonEnriched" />
+	<int:channel id="opportunityChange.create" />
+	<int:channel id="opportunityChange.create.jsonEnriched" />
+	<int:channel id="contactChange.update" />
+	<int:channel id="contactChange.update.jsonEnriched" />
+	<int:channel id="agent.create" />
+	<int:channel id="agent.create.jsonEnriched" />
+	<int:channel id="agent.update" />
+	<int:channel id="agent.update.jsonEnriched" />
+	<!-- Chanel config end -->
+
+	<int:object-to-json-transformer
+		input-channel="leadChange.update" output-channel="leadChange.update.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="lead.create" output-channel="lead.create.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="opportunityChange.update" output-channel="opportunityChange.update.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="opportunityChange.create" output-channel="opportunityChange.create.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="contactChange.update" output-channel="contactChange.update.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="agent.create" output-channel="agent.create.jsonEnriched" />
+	<int:object-to-json-transformer
+		input-channel="agent.update" output-channel="agent.update.jsonEnriched" />
+
+	<int-amqp:outbound-channel-adapter
+		channel="leadChange.update.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.leadChange.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="lead.create.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.leadCreate.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="opportunityChange.update.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.opportunityChange.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="opportunityChange.create.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.opportunityCreate.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="contactChange.update.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.contactChange.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="agent.create.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.agentCreate.routing-key}'"
+		amqp-template="amqpTemplate" />
+	<int-amqp:outbound-channel-adapter
+		channel="agent.update.jsonEnriched" exchange-name="${rabbitmq.topic.exchange}"
+		routing-key-expression="'${rabbitmq.agentUpdate.routing-key}'"
+		amqp-template="amqpTemplate" />
+
+<!-- OUTBOUND configuration END -->
+
+
+<!-- INBOUND configuration START -->
+	<!-- Lead update Inbound start -->
+	<int:channel id="leadChange.update.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="leadChange.update.inbound" queue-names="${rabbitmq.leadChange.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="leadChange.update.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer type="com.owners.gravitas.amqp.LeadSource" />
+		<int:service-activator method="handleLeadChange">
+			<bean class="com.owners.gravitas.listener.amqp.LeadChangeListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Lead update Inbound end -->
+
+	<!-- Lead create Inbound start -->
+	<int:channel id="lead.create.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="lead.create.inbound" queue-names="${rabbitmq.leadCreate.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="lead.create.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer type="com.owners.gravitas.amqp.LeadSource" />
+		<int:service-activator method="handleLeadCreate">
+			<bean class="com.owners.gravitas.listener.amqp.LeadChangeListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Lead update Inbound end -->
+
+	<!-- Opportunity update Inbound start -->
+	<int:channel id="agentOpportunity.update.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="agentOpportunity.update.inbound" queue-names="${rabbitmq.opportunityChange.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="agentOpportunity.update.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer
+			type="com.owners.gravitas.amqp.OpportunitySource" />
+		<int:service-activator method="handleOpportunityChange">
+			<bean class="com.owners.gravitas.listener.amqp.OpportunityChangeListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Opportunity update Inbound end -->
+
+	<!-- Opportunity create Inbound start -->
+	<int:channel id="agentOpportunity.create.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="agentOpportunity.create.inbound" queue-names="${rabbitmq.opportunityCreate.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="agentOpportunity.create.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer
+			type="com.owners.gravitas.amqp.OpportunitySource" />
+		<int:service-activator method="handleOpportunityCreate">
+			<bean class="com.owners.gravitas.listener.amqp.OpportunityChangeListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Opportunity create Inbound end -->
+
+	<!-- Contact update Inbound start -->
+	<int:channel id="opportunityContact.update.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="opportunityContact.update.inbound" queue-names="${rabbitmq.contactChange.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="opportunityContact.update.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer
+			type="com.owners.gravitas.amqp.OpportunityContact" />
+		<int:service-activator method="handleContactChange">
+			<bean class="com.owners.gravitas.listener.amqp.ContactChangeListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Contact update Inbound end -->
+
+	<!-- Agent create Inbound start -->
+	<int:channel id="agent.create.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="agent.create.inbound" queue-names="${rabbitmq.agentCreate.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="agent.create.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer
+			type="com.owners.gravitas.amqp.AgentSource" />
+		<int:service-activator method="handleAgentCreate">
+			<bean class="com.owners.gravitas.listener.amqp.AgentCreateListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Agent create Inbound end -->
+
+	<!-- Agent update Inbound start -->
+	<int:channel id="agent.update.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="agent.update.inbound" queue-names="${rabbitmq.agentUpdate.queue}"
+		connection-factory="rabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="agent.update.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer
+			type="com.owners.gravitas.amqp.AgentSource" />
+		<int:service-activator method="handleAgentUpdate">
+			<bean class="com.owners.gravitas.listener.amqp.AgentCreateListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Agent create Inbound end -->
+
+		<!-- buyer activity Inbound start -->
+	<int:channel id="buyerActivity.inbound" />
+	<int-amqp:inbound-channel-adapter
+		channel="buyerActivity.inbound" queue-names="${rabbitmq.buyerActivity.queue}"
+		connection-factory="analyticsRabbitConnectionFactory" error-channel="errorChannel"
+		acknowledge-mode="AUTO" concurrent-consumers="10" />
+	<int:chain input-channel="buyerActivity.inbound">
+		<int:transformer expression="new String(payload)" />
+		<int:json-to-object-transformer type="com.owners.gravitas.amqp.BuyerWebActivitySource" />
+		<int:service-activator method="handleBuyerActivity">
+			<bean class="com.owners.gravitas.listener.amqp.BuyerActivityListener" />
+		</int:service-activator>
+	</int:chain>
+	<!-- Lead update Inbound end -->
+<!-- INBOUND configuration END -->
+
+
+<!-- GENERAL configuration START -->
+	<!-- rabbit exchanges, queues, and bindings used by this app -->
+	<rabbit:topic-exchange name="${rabbitmq.topic.exchange}" durable="true">
+		<rabbit:bindings>
+			<rabbit:binding queue="${rabbitmq.leadChange.queue}"
+				pattern="${rabbitmq.leadChange.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.leadCreate.queue}"
+				pattern="${rabbitmq.leadCreate.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.opportunityChange.queue}"
+				pattern="${rabbitmq.opportunityChange.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.opportunityCreate.queue}"
+				pattern="${rabbitmq.opportunityCreate.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.contactChange.queue}"
+				pattern="${rabbitmq.contactChange.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.agentCreate.queue}"
+				pattern="${rabbitmq.agentCreate.routing-key}" />
+			<rabbit:binding queue="${rabbitmq.agentUpdate.queue}"
+				pattern="${rabbitmq.agentUpdate.routing-key}" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<rabbit:topic-exchange name="${rabbitmq.buyerActivity.exchange}" durable="true" auto-declare="false">
+		<rabbit:bindings>
+			<rabbit:binding queue="${rabbitmq.buyerActivity.queue}"
+				pattern="${rabbitmq.buyerActivity.routing-key}" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<rabbit:queue name="${rabbitmq.leadChange.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.leadCreate.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.opportunityChange.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.opportunityCreate.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.contactChange.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.agentCreate.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.agentUpdate.queue}" durable="true" />
+	<rabbit:queue name="${rabbitmq.buyerActivity.queue}" durable="true" />
+<!-- GENERAL configuration END -->
+</beans>

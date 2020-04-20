@@ -1,0 +1,19 @@
+--- HTTP Method --- 
+PATCH
+
+--- Request URL ---
+http://webc002.generic.dev.us-east-1b.hubzu.com:8080/api/agents/{agentId}/contacts/{contactId}
+
+--- headers ---
+
+Content-Type - application/json
+Authorization: Token {Verify Id token}
+
+--- Body ---
+{
+"firstName":"Loren",
+"lastName":"Dpenpa",
+"phone":"1258546514",
+"preferredContactTime":"10PM",
+"preferredContactMethod":"Email"
+}

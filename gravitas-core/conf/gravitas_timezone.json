@@ -1,0 +1,297 @@
+[
+  {
+    "state": "FL",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"FLORIDA"
+    
+  },
+  {
+    "state": "GA",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"GEORGIA"
+  },
+  {
+    "state": "SC",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"SOUTH CAROLINA"
+  },
+  {
+    "state": "NC",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"NORTH CAROLINA"
+  },
+  {
+    "state": "VA",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"NEVADA"
+  },
+  {
+    "state": "WV",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"WEST VIRGINIA"
+  },
+  {
+    "state": "OH",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"OHIO"
+  },
+  {
+    "state": "IN",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"INDIANA"
+  },
+  {
+    "state": "MI",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"MICHIGAN"
+  },
+  {
+    "state": "PA",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"PENNSYLVANIA"
+  },
+  {
+    "state": "NY",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"NEW YORK"
+  },
+  {
+    "state": "VT",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"VERMONT"
+  },
+  {
+    "state": "ME",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"MAINE"
+  },
+  {
+    "state": "NH",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"NEW HAMPSHIRE"
+  },
+  {
+    "state": "MA",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"MASSACHUSETTS"
+  },
+  {
+    "state": "RI",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"RHODE ISLAND"
+  },
+  {
+    "state": "CT",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"CONNECTICUT"
+  },
+  {
+    "state": "NJ",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"NEW JERSEY"
+  },
+  {
+    "state": "DE",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"DELAWARE"
+  },
+  {
+    "state": "MD",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"MARYLAND"
+  },
+  {
+    "state": "DC",
+    "key":"-04:00",
+    "timezone":"EST5EDT",
+    "stateName":"DISTRICT OF COLUMBIA"
+  },
+  {
+    "state": "AL",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"ALABAMA"
+  },
+  {
+    "state": "TN",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"TENNESSEE"
+  },
+  {
+    "state": "KY",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"KENTUCKY"
+  },
+  {
+    "state": "MS",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"MISSISSIPPI"
+  },
+  {
+    "state": "IL",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"ILLINOIS"
+  },
+  {
+    "state": "WI",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"WISCONSIN"
+  },
+  {
+    "state": "MN",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"MINNESOTA"
+  },
+  {
+    "state": "IA",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"IOWA"
+  },
+  {
+    "state": "MO",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"MISSOURI"
+  },
+  {
+    "state": "AR",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"ARKANSAS"
+  },
+  {
+    "state": "LA",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"LOUISIANA"
+  },
+  {
+    "state": "ND",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"NORTH DAKOTA"
+  },
+  {
+    "state": "SD",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"SOUTH DAKOTA"
+  },
+  {
+    "state": "NE",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"NEBRASKA"
+  },
+  {
+    "state": "KS",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"KANSAS"
+  },
+  {
+    "state": "OK",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"OKLAHOMA"
+  },
+  {
+    "state": "TX",
+    "key":"-05:00",
+    "timezone":"CST6CDT",
+    "stateName":"TEXAS"
+  },
+  {
+    "state": "NM",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"NEW MEXICO"
+  },
+  {
+    "state": "CO",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"COLORADO"
+  },
+  {
+    "state": "WY",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"WYOMING"
+  },
+  {
+    "state": "MT",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"MONTANA"
+  },
+  {
+    "state": "ID",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"IDAHO"
+  },
+  {
+    "state": "UT",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"UTAH"
+  },
+  {
+    "state": "AZ",
+    "key":"-06:00",
+    "timezone":"MST7MDT",
+    "stateName":"ARIZONA"
+  },
+  {
+    "state": "CA",
+    "key":"-07:00",
+    "timezone":"PST8PDT",
+    "stateName":"CALIFORNIA"
+  },
+  {
+    "state": "NV",
+    "key":"-07:00",
+    "timezone":"PST8PDT",
+    "stateName":"NEVADA"
+  },
+  {
+    "state": "OR",
+    "key":"-07:00",
+    "timezone":"PST8PDT",
+    "stateName":"OREGON"
+  },
+  {
+    "state": "WA",
+    "key":"-07:00",
+    "timezone":"PST8PDT",
+    "stateName":"WASHINGTON"
+  }
+]

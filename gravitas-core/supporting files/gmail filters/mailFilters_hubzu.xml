@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+	<title>Mail Filters</title>
+	<id>tag:mail.google.com,2008:filters:1469096000946,1469101988810,1469102008738,1469102024728,1469102046510,1469102063102,1469102075239,1471285081896,1471944073471</id>
+	<updated>2016-08-23T09:23:12Z</updated>
+	<author>
+		<name>Hubzu Leads</name>
+		<email>hubzuaffiliatedleads@gmail.com</email>
+	</author>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469096000946</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='[MARKETING] A buyer wants to know more about'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469101988810</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='New Inquiry from Homes.com'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469102008738</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='New message for'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469102024728</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='[MARKETING] Property Inquiry from Homebidz.co'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469102046510</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='Question about the home'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469102063102</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='New realtor.com'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1469102075239</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='UltraForeclosures'/>
+		<apps:property name='label' value='Potential_Leads'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1471285081896</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='hasTheWord' value='lead parsing error'/>
+		<apps:property name='label' value='Lead Parsing Error'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1471944073471</id>
+		<updated>2016-08-23T09:23:12Z</updated>
+		<content></content>
+		<apps:property name='subject' value='(Lead Data Validation Error) OR (Lead Parsing Error)'/>
+		<apps:property name='label' value='Lead_Errors'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+</feed>

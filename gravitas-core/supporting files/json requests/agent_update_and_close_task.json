@@ -1,0 +1,26 @@
+--- Request URL ---
+http://gravitas-qe.owners.com/api/agents/<uid1>/tasks/<taskId>
+
+--- method ---
+
+PATCH
+
+--- headers ---
+
+Content-Type - application/json
+Authorization - Token <google-login-token>
+
+--- Body ---
+
+--- Update task---
+{
+	"title":"title-test-1",
+	"description":"notes-test-1",
+	"dateTm":"1486481948000",
+	"location":"meetAt-test-1"
+}
+
+--- To Close task do not pass the dueDtm field ---
+{
+	"description":"notes-test-1"
+}

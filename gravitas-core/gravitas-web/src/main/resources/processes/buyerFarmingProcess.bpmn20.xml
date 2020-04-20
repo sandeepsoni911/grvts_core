@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="buyerFarmingProcess" name="Buyer farming process" isExecutable="true">
+    <subProcess id="subprocess1" name="Sub Process">
+      <endEvent id="endBuyerFamringevent" name="End buyer farming event"></endEvent>
+      <exclusiveGateway id="buyerFarmingGateway" name="Exclusive Gateway"></exclusiveGateway>
+      <sequenceFlow id="flow14" name="Qualified lead" sourceRef="buyerFarmingGateway" targetRef="fieldAgentFarmingCallActivity">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${buyerFarmType=='ACTIVE_BUYER' && isFarmingRequired==true}]]></conditionExpression>
+      </sequenceFlow>
+      <sequenceFlow id="flow15" name="Lost/outbound attempt &amp; older&gt;3 days" sourceRef="buyerFarmingGateway" targetRef="insideSalesFarmingCallActivity">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${buyerFarmType=='LONG_TERM_BUYER' && isFarmingRequired==true}]]></conditionExpression>
+      </sequenceFlow>
+      <sequenceFlow id="flow32" name="Not eligible lead for farming" sourceRef="buyerFarmingGateway" targetRef="endBuyerFamringevent">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${buyerFarmType=='LOST_BUYER' && isFarmingRequired==true}]]></conditionExpression>
+      </sequenceFlow>
+      <sequenceFlow id="flow33" name="Non farming lead" sourceRef="buyerFarmingGateway" targetRef="endBuyerFamringevent">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFarmingRequired==false}]]></conditionExpression>
+      </sequenceFlow>
+      <startEvent id="startBuyerFarmingEvent" name="Start buyer farming event"></startEvent>
+      <sequenceFlow id="flow25" sourceRef="startBuyerFarmingEvent" targetRef="leadManagementCallActivity"></sequenceFlow>
+      <callActivity id="leadManagementCallActivity" name="Lead management process" calledElement="leadManagementProcess">
+        <extensionElements>
+          <flowable:in source="LEAD" target="LEAD"></flowable:in>
+          <flowable:in source="buyerFarmingDelay" target="buyerFarmingDelay"></flowable:in>
+          <flowable:out source="buyerFarmType" target="buyerFarmType"></flowable:out>
+          <flowable:out source="isFarmingRequired" target="isFarmingRequired"></flowable:out>
+        </extensionElements>
+      </callActivity>
+      <sequenceFlow id="flow26" sourceRef="leadManagementCallActivity" targetRef="buyerFarmingGateway"></sequenceFlow>
+      <callActivity id="insideSalesFarmingCallActivity" name="Inside Sales Farming process" calledElement="insideSalesFarmingProcess">
+        <extensionElements>
+          <flowable:in source="LEAD" target="LEAD"></flowable:in>
+          <flowable:out source="LEAD" target="LEAD"></flowable:out>
+          <flowable:out source="buyerFarmType" target="buyerFarmType"></flowable:out>
+          <flowable:out source="leadStatus" target="leadStatus"></flowable:out>
+          <flowable:out source="processWebActivity" target="processWebActivity"></flowable:out>
+        </extensionElements>
+      </callActivity>
+      <sequenceFlow id="flow30" name="New lead OR Qualified lead" sourceRef="insideSalesFarmingCallActivity" targetRef="qualifiedOrNoResponseGateway"></sequenceFlow>
+      <callActivity id="fieldAgentFarmingCallActivity" name="Field agent farming process" calledElement="fieldAgentFarmingProcess">
+        <extensionElements>
+          <flowable:in source="LEAD" target="LEAD"></flowable:in>
+          <flowable:in source="buyerFarmType" target="buyerFarmType"></flowable:in>
+          <flowable:in source="leadStatus" target="leadStatus"></flowable:in>
+        </extensionElements>
+      </callActivity>
+      <exclusiveGateway id="qualifiedOrNoResponseGateway" name="Exclusive Gateway"></exclusiveGateway>
+      <sequenceFlow id="flow28" name="Outbound lead to qualified" sourceRef="qualifiedOrNoResponseGateway" targetRef="fieldAgentFarmingCallActivity">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${leadStatus=='QUALIFIED'}]]></conditionExpression>
+      </sequenceFlow>
+      <sequenceFlow id="flow31" name="No response on farming" sourceRef="qualifiedOrNoResponseGateway" targetRef="endBuyerFamringevent">
+        <conditionExpression xsi:type="tFormalExpression"><![CDATA[${leadStatus=='NEW'}]]></conditionExpression>
+      </sequenceFlow>
+      <sequenceFlow id="flow38" sourceRef="fieldAgentFarmingCallActivity" targetRef="endBuyerFamringevent"></sequenceFlow>
+    </subProcess>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <sequenceFlow id="flow34" sourceRef="startevent1" targetRef="subprocess1"></sequenceFlow>
+    <boundaryEvent id="boundaryerror1" name="Buyer farming process error" attachedToRef="subprocess1">
+      <errorEventDefinition errorRef="buyer.farming.error"></errorEventDefinition>
+    </boundaryEvent>
+    <serviceTask id="buyerFarmingErrorHandler" name="Buyer farming error task" flowable:delegateExpression="${buyerFarmingErrorHandler}"></serviceTask>
+    <sequenceFlow id="flow35" sourceRef="boundaryerror1" targetRef="buyerFarmingErrorHandler"></sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow36" sourceRef="buyerFarmingErrorHandler" targetRef="endevent1"></sequenceFlow>
+    <sequenceFlow id="flow37" sourceRef="subprocess1" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_buyerFarmingProcess">
+    <bpmndi:BPMNPlane bpmnElement="buyerFarmingProcess" id="BPMNPlane_buyerFarmingProcess">
+      <bpmndi:BPMNShape bpmnElement="subprocess1" id="BPMNShape_subprocess1">
+        <omgdc:Bounds height="381.0" width="1094.0" x="96.0" y="111.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endBuyerFamringevent" id="BPMNShape_endBuyerFamringevent">
+        <omgdc:Bounds height="35.0" width="35.0" x="1150.0" y="264.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="buyerFarmingGateway" id="BPMNShape_buyerFarmingGateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="517.0" y="264.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startBuyerFarmingEvent" id="BPMNShape_startBuyerFarmingEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="149.0" y="264.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="leadManagementCallActivity" id="BPMNShape_leadManagementCallActivity">
+        <omgdc:Bounds height="91.0" width="217.0" x="257.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="insideSalesFarmingCallActivity" id="BPMNShape_insideSalesFarmingCallActivity">
+        <omgdc:Bounds height="91.0" width="205.0" x="435.0" y="374.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="fieldAgentFarmingCallActivity" id="BPMNShape_fieldAgentFarmingCallActivity">
+        <omgdc:Bounds height="91.0" width="207.0" x="780.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="qualifiedOrNoResponseGateway" id="BPMNShape_qualifiedOrNoResponseGateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="863.0" y="399.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="boundaryerror1" id="BPMNShape_boundaryerror1">
+        <omgdc:Bounds height="30.0" width="30.0" x="613.0" y="471.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="556.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="buyerFarmingErrorHandler" id="BPMNShape_buyerFarmingErrorHandler">
+        <omgdc:Bounds height="61.0" width="105.0" x="506.0" y="527.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1200.0" y="540.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="557.0" y="284.0"></omgdi:waypoint>
+        <omgdi:waypoint x="780.0" y="281.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="65.0" x="570.0" y="259.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="537.0" y="304.0"></omgdi:waypoint>
+        <omgdi:waypoint x="537.0" y="374.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="532.0" y="305.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow32" id="BPMNEdge_flow32">
+        <omgdi:waypoint x="537.0" y="264.0"></omgdi:waypoint>
+        <omgdi:waypoint x="618.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="867.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1144.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1167.0" y="264.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="680.0" y="138.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
+        <omgdi:waypoint x="537.0" y="264.0"></omgdi:waypoint>
+        <omgdi:waypoint x="618.0" y="149.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1144.0" y="149.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1167.0" y="264.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="14.0" width="81.0" x="680.0" y="113.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="184.0" y="281.0"></omgdi:waypoint>
+        <omgdi:waypoint x="257.0" y="281.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="474.0" y="281.0"></omgdi:waypoint>
+        <omgdi:waypoint x="517.0" y="284.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow30" id="BPMNEdge_flow30">
+        <omgdi:waypoint x="640.0" y="419.0"></omgdi:waypoint>
+        <omgdi:waypoint x="863.0" y="419.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="681.0" y="364.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="883.0" y="399.0"></omgdi:waypoint>
+        <omgdi:waypoint x="883.0" y="327.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="702.0" y="341.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="903.0" y="419.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1144.0" y="419.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1167.0" y="299.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="920.0" y="368.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="987.0" y="281.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1150.0" y="281.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
+        <omgdi:waypoint x="573.0" y="35.0"></omgdi:waypoint>
+        <omgdi:waypoint x="643.0" y="111.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow35" id="BPMNEdge_flow35">
+        <omgdi:waypoint x="628.0" y="501.0"></omgdi:waypoint>
+        <omgdi:waypoint x="558.0" y="527.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow36" id="BPMNEdge_flow36">
+        <omgdi:waypoint x="611.0" y="557.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1200.0" y="557.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow37" id="BPMNEdge_flow37">
+        <omgdi:waypoint x="1190.0" y="301.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1217.0" y="295.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1217.0" y="540.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

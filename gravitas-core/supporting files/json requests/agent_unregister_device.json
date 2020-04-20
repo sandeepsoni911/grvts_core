@@ -1,0 +1,11 @@
+--- Request URL ---
+http://webc002.generic.dev.us-east-1b.hubzu.com:8080/api/agents/<agentId>/devices/<deviceId>
+
+--- method ---
+
+DELETE
+
+--- headers ---
+
+Content-Type - application/json
+Authorization - Token <google-login-token>

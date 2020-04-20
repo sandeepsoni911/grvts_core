@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:flowable="http://flowable.org/bpmn" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="fieldAgentFarmingProcess" name="Field agent farming process" isExecutable="true">
+    <exclusiveGateway id="leadFlowGateway" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow7" sourceRef="checkForFarmingEligibility" targetRef="leadFlowGateway"></sequenceFlow>
+    <serviceTask id="checkForFarmingEligibility" name="Check for farming eligibility" flowable:delegateExpression="${checkForFarmingEligibilityServiceTask}"></serviceTask>
+    <endEvent id="endOpportunityManagementEvent" name="End Opportunity Management Event"></endEvent>
+    <startEvent id="startevent1" name="Start"></startEvent>
+    <sequenceFlow id="flow18" sourceRef="startevent1" targetRef="checkForFarmingEligibility"></sequenceFlow>
+    <sequenceFlow id="flow22" sourceRef="leadFlowGateway" targetRef="endOpportunityManagementEvent">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFarmingRequired==false || (isFarmingRequired==true && isOpportunity==false)}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="opportunityFarmingServiceTask" name="Opportunity Farming" flowable:delegateExpression="${opportunityFarmingServiceTask}"></serviceTask>
+    <sequenceFlow id="flow25" name="Farming of Opportunity" sourceRef="leadFlowGateway" targetRef="opportunityFarmingServiceTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${isFarmingRequired==true && isOpportunity==true}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow26" sourceRef="opportunityFarmingServiceTask" targetRef="endOpportunityManagementEvent"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_opportunityManagementProcess">
+    <bpmndi:BPMNPlane bpmnElement="opportunityManagementProcess" id="BPMNPlane_opportunityManagementProcess">
+      <bpmndi:BPMNShape bpmnElement="leadFlowGateway" id="BPMNShape_leadFlowGateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="427.0" y="263.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="checkForFarmingEligibility" id="BPMNShape_checkForFarmingEligibility">
+        <omgdc:Bounds height="55.0" width="131.0" x="210.0" y="256.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endOpportunityManagementEvent" id="BPMNShape_endOpportunityManagementEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="999.0" y="200.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="100.0" y="266.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="opportunityFarmingServiceTask" id="BPMNShape_opportunityFarmingServiceTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="964.0" y="277.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="341.0" y="283.0"></omgdi:waypoint>
+        <omgdi:waypoint x="427.0" y="283.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="135.0" y="283.0"></omgdi:waypoint>
+        <omgdi:waypoint x="210.0" y="283.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="447.0" y="263.0"></omgdi:waypoint>
+        <omgdi:waypoint x="447.0" y="218.0"></omgdi:waypoint>
+        <omgdi:waypoint x="999.0" y="217.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="467.0" y="283.0"></omgdi:waypoint>
+        <omgdi:waypoint x="447.0" y="304.0"></omgdi:waypoint>
+        <omgdi:waypoint x="964.0" y="304.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="42.0" width="100.0" x="467.0" y="283.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="1016.0" y="277.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1016.0" y="235.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

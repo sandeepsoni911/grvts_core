@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>gravitas-service</artifactId>
+	<packaging>jar</packaging>
+	<name>Gravitas service layer module</name>
+	<description>Gravitas service layer module</description>
+
+	<parent>
+		<groupId>com.owners.gravitas</groupId>
+		<artifactId>gravitas</artifactId>
+		<version>2.0.0</version>
+	</parent>
+
+	<dependencies>
+		<!-- Project module dependencies -->
+		<dependency>
+			<groupId>com.owners.gravitas</groupId>
+			<artifactId>gravitas-dto</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.owners.gravitas</groupId>
+			<artifactId>gravitas-dao</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.hubzu.common.dsync</groupId>
+			<artifactId>common-dsync-database</artifactId>
+			<version>${common-dsync-database.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.integration</groupId>
+			<artifactId>spring-integration-amqp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.force.api</groupId>
+			<artifactId>force-partner-api</artifactId>
+			<version>35.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.oauth-client</groupId>
+			<artifactId>google-oauth-client-jetty</artifactId>
+			<version>1.22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.apis</groupId>
+			<artifactId>google-api-services-calendar</artifactId>
+			<version>v3-rev216-1.22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>4.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.hubzu.common.dsync</groupId>
+			<artifactId>common-dsync-jedis</artifactId>
+			<version>${common-dsync-jedis.version}</version>
+		</dependency>
+		<dependency>
+  		<groupId>org.drools</groupId>
+  		<artifactId>drools-compiler</artifactId>
+  		<version>6.3.0.Final</version>
+ 	 </dependency>
+  	 <dependency>
+   	 	<groupId>org.kie</groupId>
+   	 	<artifactId>kie-api</artifactId>
+   	 	<version>6.3.0.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>com.hubzu.common</groupId>
+		<artifactId>common-daemon</artifactId>
+		<version>[3.0.0,)</version>
+	</dependency>
+	</dependencies>
+
+
+</project>

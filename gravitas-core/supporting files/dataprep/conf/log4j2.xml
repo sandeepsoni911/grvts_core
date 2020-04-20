@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level [%t] %logger{36} - %msg%n" />
+		</Console>
+		<RollingFile name="RollingFile"
+			fileName="${sys:dataprep.home}/logs/dataprep.log"
+			filePattern="${sys:dataprep.home}/logs/dataprep-%i.log"
+			bufferedIO="false" immediateFlush="true" append="true">
+			<PatternLayout>
+				<pattern>%d [%t] %p %c{1.} %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5 MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="200" />
+		</RollingFile>
+	</Appenders>
+
+	<Loggers>
+		<Root level="error">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="Console" />
+		</Root>
+		<Logger name="org.springframework" level="info" additivity="false">
+			<AppenderRef ref="RollingFile"></AppenderRef>
+			<AppenderRef ref="Console"></AppenderRef>
+		</Logger>
+		<Logger name="com.owners.gravitas" level="debug" additivity="false">
+			<AppenderRef ref="RollingFile"></AppenderRef>
+		</Logger>
+		<Logger name="com.fasterxml.jackson" level="debug" additivity="false">
+			<AppenderRef ref="RollingFile"></AppenderRef>
+			<AppenderRef ref="Console"></AppenderRef>
+		</Logger>
+	</Loggers>
+</Configuration>

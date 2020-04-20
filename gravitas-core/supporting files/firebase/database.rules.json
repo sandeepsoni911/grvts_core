@@ -1,0 +1,64 @@
+{
+  "rules": {
+    "agents": {
+      "$uid": {
+        ".read": "$uid === auth.uid || root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+        ".write": false,
+        "opportunities": {
+          ".indexOn": [
+            "stage"
+          ]
+        },
+        "tasks": {
+          ".indexOn": [
+            "opportunityId"
+          ]
+        },
+        "requests": {
+          ".indexOn": [
+            "opportunityId"
+          ]
+        },
+        "agentNotes": {
+          ".indexOn": [
+            "opportunityId"
+          ]
+        }
+      },
+      ".indexOn": [
+        "info/email"
+      ]
+    },
+    "search": {
+      ".read": "root.child('agents').child(auth.uid).exists() || root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+      ".write": false,
+      ".indexOn": [
+        "agentEmail",
+        "contactEmail",
+        "crmOpportunityId",
+        "opportunityId",
+        "agentId",
+        "contactId"
+      ]
+    },
+    "users": {
+      ".read": "root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+      ".write": false,
+      ".indexOn": [
+        "roles"
+      ]
+    },
+    "versionInfo": {
+      ".read": "root.child('agents').child(auth.uid).exists() || root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+      ".write": false
+    },
+    "UIClient": {
+      ".read": "root.child('agents').child(auth.uid).exists() || root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+      ".write": false
+    },
+    "refdata": {
+      ".read": "root.child('agents').child(auth.uid).exists() || root.child('users').child(auth.token.email.replace('.', '%2E')).exists()",
+      ".write": false
+    }
+  }
+}
